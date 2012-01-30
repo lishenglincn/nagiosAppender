@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!--Appends messages to System.out-->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!--Alters nagios of warnings, errors and fatal messages-->
+    <appender class="de.viaboxx.nagios.NagiosAppender" name="nagios">
+
+        <!--Controls how status messages appear in nagios -->
+        <!--These values can be set programmatically:-->
+        <!--
+            MDC.put(NagiosAppender.MONITORED_HOST_NAME,"my host name");
+            MDC.put(NagiosAppender.MONITORED_SERVICE_NAME,"my service code");
+        -->
+        <!--NOTE: if a value is set here, it superseeds programmatic values!-->
+
+        <!--<param name="monitoredHostName" value="xml host"/>-->
+        <param name="monitoredServiceName" value="TEST 1 2 3"/>
+
+        <!--How to contact the nsca server.-->
+        <param name="nagiosHost" value="[PUT_YOUR_NAGOS/NSCA_SERVER_ADDRESS_HERE]"/>
+        <!--Encryption to use. Supported values are:-->
+        <!--  NONE - no encryption, nagios option "0" -->
+        <!--  XOR - simple obfuscation, no encryption, nagios option "1" -->
+        <!--  TRIPLE_DES - 3DES encryption, nagios option "3"-->
+        <param name="nagiosEncryption" value="TRIPLE_DES"/>
+        <param name="nagiosPassword" value="[PUT_YOUR_PASSWORD_HERE]"/>
+
+        <!--Mapping of log4j to nagios levels-->
+        <!--Supported values:     -->
+        <!--    WARNING               -->
+        <!--    CRITICAL              -->
+        <param name="monitorWarnAs" value="WARNING"/>
+        <param name="monitorErrorAs" value="WARNING"/>
+        <param name="monitorFatalAs" value="CRITICAL"/>
+
+        <!--Controls if we automatically set the state -->
+        <!--back to ok after critical or warning has been sent.-->
+        <!--Default is "false".-->
+        <param name="resetStateAfterCritical" value="true"/>
+        <param name="resetStateAfterWarning" value="true"/>
+
+    </appender>
+
+    <root>
+        <priority value="debug"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="nagios"/>
+    </root>
+
+</log4j:configuration>
+
+
