@@ -46,7 +46,7 @@ public class NagiosAppender extends AppenderSkeleton {
     protected void append(LoggingEvent event) {
         Level nagiosLevel = nagiosLevel(event);
         if (nagiosLevel != null) {
-            sendEventWithLevel(event.getRenderedMessage(), nagiosLevel);
+            sendEventWithLevel(renderMsg(event), nagiosLevel);
             if (resetStateAfterCritical && nagiosLevel.equals(Level.CRITICAL)) {
                 sendEventWithLevel("Reset after CRITICAL: " + event.getRenderedMessage(), Level.OK);
             }
@@ -54,6 +54,10 @@ public class NagiosAppender extends AppenderSkeleton {
                 sendEventWithLevel("Reset after WARNING: " + event.getRenderedMessage(), Level.OK);
             }
         }
+    }
+
+    private String renderMsg(LoggingEvent event) {
+        return "[" + event.getLoggerName() + "] " + event.getRenderedMessage();
     }
 
     private void sendEventWithLevel(String message, Level nagiosLevel) {

@@ -3,12 +3,12 @@ Nagios Appender for Log4J
 
 Provides a nagios appender that is capable of logging directly to nagios without parsing any error logs, just by adding a jar and a config option to your project.
 
-An example can be foudn in the "docs" directory.
+An example can be found in the "docs" directory.
 
 Know Limitations
 ================
 
-The support for encryption is limited. This is jist a thin wrapper for the stuff provided through [jsendnsca](http://code.google.com/p/jsendnsca/), which limits the encyption to XOR obfuscation and Triple-DES, which makes this projet a little bit more capable as the appender mentioned in [this blog post](http://www.novell.com/communities/node/4131/application-monitoring-made-easy-java-applications-using-nagios).
+The support for encryption is limited. This is just a thin wrapper for the stuff provided through [jsendnsca](http://code.google.com/p/jsendnsca/), which limits the encyption to XOR obfuscation and Triple-DES, which makes this projet a little bit more capable than the appender mentioned in [this blog post](http://www.novell.com/communities/node/4131/application-monitoring-made-easy-java-applications-using-nagios).
 
 License
 =======
