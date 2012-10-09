@@ -22,7 +22,7 @@
     <groupId>de.viaboxx</groupId>
     <artifactId>log4j-nagios-appender</artifactId>
     <packaging>jar</packaging>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.0</version>
     <name>nagiosAppender</name>
     <description>Log4J Appender which is directly pushing messages to nagios.</description>
     <licenses>
